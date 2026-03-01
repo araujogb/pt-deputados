@@ -32,3 +32,6 @@ Thumbs.db
 # Optional: Don't commit large data files (uncomment if preferred)
 # data/*.parquet
 # data/*.jsonl
+
+# Raw scraped HTML (cache)
+raw/

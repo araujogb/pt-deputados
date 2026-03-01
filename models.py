@@ -5,7 +5,7 @@ from typing import List, Optional
 class Commission(BaseModel):
     """One parliamentary commission with optional role"""
     name: str
-    role: Optional[str] = None   # e.g. "Presidente", "Vice-Presidente", "Suplente"
+    role: Optional[str] = None
 
 class Deputy(BaseModel):
     """Full structured data for one deputy"""
@@ -17,8 +17,8 @@ class Deputy(BaseModel):
     party: str
     education: List[str] = Field(default_factory=list)
     profession: Optional[str] = None
-    previous_cargos: List[str] = Field(default_factory=list)
+    previous_positions: List[str] = Field(default_factory=list)
     current_commissions: List[Commission] = Field(default_factory=list)
     bio_url: str
     photo_url: Optional[str] = None
-    last_updated: str = Field(default_factory=lambda: date.today().isoformat())
+    scraped_at: str = Field(default_factory=lambda: date.today().isoformat())
