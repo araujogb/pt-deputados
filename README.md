@@ -63,3 +63,15 @@ deputados --help
 **CC0-1.0** (Public Domain) - Free to use for any purpose.
 
 Data sourced from [Assembleia da República](https://www.parlamento.pt).
+
+---
+
+## 💻 Examples
+
+### Python
+
+See [examples/python_usage.py](examples/python_usage.py)
+
+### R
+
+See [examples/r_usage.R](examples/r_usage.R)
