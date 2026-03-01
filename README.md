@@ -8,14 +8,25 @@ Scraper moderno + dados limpos de todos os **230 deputados** da Assembleia da Re
 
 ## 📦 Instalação
 
-See repository for installation instructions.
+```bash
+git clone https://github.com/araujogb/pt-deputados.git
+cd pt-deputados
+uv venv
+source .venv/bin/activate
+uv pip install -e .
+```
 
 ---
 
 ## 🚀 Usage
 
+```bash
+# Fetch all deputy data
 deputados fetch
+
+# Show help
 deputados --help
+```
 
 ---
 
@@ -43,9 +54,33 @@ deputados --help
 
 ### Python
 
+```python
+import polars as pl
+
+df = pl.read_parquet("data/deputies.parquet")
+
+# Filter by party
+psd = df.filter(pl.col("party") == "PSD")
+
+# Count education entries
+df.with_columns(
+    pl.col("education").list.len().alias("education_count")
+)
+```
+
 See [examples/python_usage.py](examples/python_usage.py)
 
 ### R
+
+```r
+library(arrow)
+library(dplyr)
+
+df <- read_parquet("data/deputies.parquet")
+
+# Filter by party
+psd <- df %>% filter(party == "PSD")
+```
 
 See [examples/r_usage.R](examples/r_usage.R)
 
@@ -69,6 +104,12 @@ See [examples/r_usage.R](examples/r_usage.R)
 
 ## 📝 License
 
-**CC0-1.0** (Public Domain)
+**CC0-1.0** (Public Domain) - Free to use for any purpose.
 
 Data sourced from [Assembleia da República](https://www.parlamento.pt).
+
+---
+
+## 🤝 Contributing
+
+Issues and PRs welcome! This is a community project for transparent access to Portuguese parliamentary data.
