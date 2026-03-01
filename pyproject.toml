@@ -1,0 +1,27 @@
+[build-system]
+requires = ["setuptools>=61", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pt-deputados"
+version = "1.0.0"
+description = "Modern scraper for all 230 Portuguese Deputies"
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "CC0-1.0" }
+dependencies = [
+    "httpx[http2]>=0.28",
+    "beautifulsoup4>=4.12",
+    "lxml>=5.0",
+    "polars>=1.0",
+    "pydantic>=2.0",
+    "tqdm>=4.66",
+    "typer>=0.12",
+    "pyarrow>=15.0"
+]
+
+[project.scripts]
+deputados = "cli:app"
+
+[tool.setuptools]
+py-modules = ["cli", "scraper", "models", "parsers"]

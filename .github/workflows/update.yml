@@ -1,0 +1,42 @@
+name: Monthly Data Update
+
+on:
+  schedule:
+    - cron: '0 8 1 * *'  # 1st of every month at 08:00 UTC
+  workflow_dispatch:     # Allow manual trigger
+
+jobs:
+  scrape:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v3
+
+      - name: Create virtual environment
+        run: uv venv
+
+      - name: Install package
+        run: uv pip install -e .
+
+      - name: Run scraper
+        run: |
+          source .venv/bin/activate
+          deputados fetch
+
+      - name: Commit and push changes
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "chore: auto-update deputies data"
+          file_pattern: "data/*"
+          branch: main
